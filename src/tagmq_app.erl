@@ -14,12 +14,21 @@
 %% API
 %%====================================================================
 
-start(_StartType, _StartArgs) ->
-    tagmq_sup:start_link().
+start(_Type, _Args) ->
+  Dispatch = cowboy_router:compile([
+    {'_', [{"/", hello_handler, []}]}
+  ]),
+  cowboy:start_http(
+    http,
+    100,
+    [{port, 8080}],
+    [{env, [{dispatch, Dispatch}]}]
+  ),
+  tagmq_sup:start_link().
 
 %%--------------------------------------------------------------------
 stop(_State) ->
-    ok.
+  ok.
 
 %%====================================================================
 %% Internal functions
