@@ -1,16 +1,17 @@
-{application, tagmq,
- [{description, "An OTP application"},
+{application, tagmq, [
+  {description, "A tag-based message queue"},
   {vsn, "0.1.0"},
   {registered, []},
   {mod, { tagmq_app, []}},
-  {applications,
-   [kernel,
-    stdlib
-   ]},
+  {applications, [
+    kernel,
+    stdlib,
+    cowboy
+  ]},
   {env,[]},
   {modules, []},
 
   {maintainers, []},
   {licenses, []},
   {links, []}
- ]}.
+]}.
