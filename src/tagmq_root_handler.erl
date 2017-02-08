@@ -9,6 +9,7 @@ init(Req0, Opts) ->
   #{headers := Headers} = Req0,
   case maps:get(<<"connection">>, Headers) of
     <<"Upgrade">> ->
+      io:format("headers: ~p.", [Headers]),
       {cowboy_websocket, Req0, Opts};
 
     _Else ->
