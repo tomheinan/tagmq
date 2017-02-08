@@ -16,7 +16,7 @@
 
 start(_Type, _Args) ->
   Dispatch = cowboy_router:compile([
-    {'_', [{"/", root_http_handler, []}]}
+    {'_', [{"/", tagmq_root_handler, []}]}
   ]),
   {ok, _} = cowboy:start_clear(http, 100, [{port, 8080}], #{
 		env => #{dispatch => Dispatch}
