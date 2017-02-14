@@ -2,13 +2,22 @@
 
 -export([init/2]).
 
-init(Req0, Opts) ->
-  Req = cowboy_req:reply(
+init(Req, Opts) ->
+  Info = #{
+    tagmq => #{
+      version => tagmq_config:version()
+    }
+  },
+
+  Payload = jiffy:encode(Info, [pretty]),
+
+  Res = cowboy_req:reply(
     200,
     #{
       <<"content-type">> => <<"application/json">>
     },
-    <<"{\"hello\": \"tagmq\"}">>,
-    Req0
+    Payload,
+    Req
   ),
-  {ok, Req, Opts}.
+
+  {ok, Res, Opts}.
