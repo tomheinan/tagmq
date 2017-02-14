@@ -5,7 +5,8 @@
 init(Req, Opts) ->
   Info = #{
     tagmq => #{
-      version => tagmq_config:version()
+      version => tagmq_config:version(),
+      connections => tagmq_connections:count()
     }
   },
 
